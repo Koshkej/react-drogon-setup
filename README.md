@@ -2,7 +2,7 @@
 
 Automated script for rapid fullstack project initialization with modern stack:
 - **Frontend**: React 18 (Webpack 5 + Babel 7)
-- **Backend**: Drogon C++ Framework (HTTP-server 1.x)
+- **Backend**: [Drogon С++ Framework](https://github.com/drogonframework/drogon)
 - **Infrastructure**: Automated build and deployment
 
 ### What does this script do?
