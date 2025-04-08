@@ -112,16 +112,16 @@ Script executes sequentially:
 ```bash
 my_project/
 ├── frontend/
-│ ├── src/              # React sources
-│ ├── webpack.config.js # Production optimizations
-│ └── babel.config.json # JSX support
+│   ├── src/              # React sources
+│   ├── webpack.config.js # Production optimizations
+│   └── babel.config.json # JSX support
 ├── backend/
-│ ├── CMakeLists.txt    # Pre-configured build
-│ └── main.cc           # Server listening on :8080
+│   ├── CMakeLists.txt    # Pre-configured build
+│   └── main.cc           # Server listening on :8080
 └── deploy/
-   ├── index.html          # Entry point
-   ├── main.js             # ReatJS complied app
-   └── my_project          # Compiled executable
+    ├── index.html        # Entry point
+    ├── main.js           # ReactJS compiled app
+    └── my_project        # Compiled executable
 ```
 
 3. Drogon setup:
