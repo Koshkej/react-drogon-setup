@@ -7,7 +7,7 @@ set -e
 PROJECT_NAME="$1"
 
 if [ -z "$PROJECT_NAME" ]; then
-  echo "Usage: create-react_drogon-project <project-name>"
+  echo "Usage: create-react-drogon <project-name>"
   exit 1
 fi
 
