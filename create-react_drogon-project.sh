@@ -1,0 +1,202 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+# Get project name from argument
+PROJECT_NAME="$1"
+
+if [ -z "$PROJECT_NAME" ]; then
+  echo "Usage: create-react_drogon-project <project-name>"
+  exit 1
+fi
+
+# Check if project directory already exists in the current directory
+if [ -d "$PROJECT_NAME" ]; then
+  echo "The directory \"$PROJECT_NAME\" already exists. Please choose a different project name."
+  exit 1
+fi
+
+echo "Creating project directory: $PROJECT_NAME"
+# Create project subdirectories for frontend, backend, and deploy
+mkdir -p "$PROJECT_NAME/frontend"
+# Do not create backend here because we'll let drogon_ctl create it cleanly
+mkdir -p "$PROJECT_NAME/deploy"
+
+# Change into the project directory
+cd "$PROJECT_NAME"
+
+# Define directory variables
+FRONTEND_DIR="frontend"
+BACKEND_DIR="backend"
+DEPLOY_DIR="deploy"
+
+# Create frontend directory if it doesn't exist
+mkdir -p "$FRONTEND_DIR"
+
+# Check and install Drogon if necessary
+if ! command -v drogon_ctl &> /dev/null; then
+  echo "Drogon is not installed, installing..."
+  sudo apt-get update
+  sudo apt-get install -y drogon
+else
+  echo "Drogon is already installed"
+fi
+
+# Remove backend directory if it exists, then create Drogon project there
+if [ -d "$BACKEND_DIR" ]; then
+  rm -rf "$BACKEND_DIR"
+fi
+echo "Creating Drogon project in $BACKEND_DIR"
+drogon_ctl create project "$BACKEND_DIR" > /dev/null
+
+# Update CMakeLists.txt so that the runtime output directory is set to ../deploy.
+# Insert the setting right after the 'project(' line.
+sed -i '/^project(/a set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/../deploy")' "$BACKEND_DIR/CMakeLists.txt"
+
+# (Optional) Ensure main.cc exists and listens on port 8080.
+# If main.cc does not exist or needs to be overridden, uncomment the following block:
+: <<'END_COMMENT'
+if [ ! -f "$BACKEND_DIR/main.cc" ]; then
+  cat > "$BACKEND_DIR/main.cc" <<EOF
+#include <drogon/drogon.h>
+int main() {
+    drogon::app().addListener("0.0.0.0", 8080);
+    drogon::app().run();
+    return 0;
+}
+EOF
+fi
+END_COMMENT
+
+# Create index.html in the deploy directory to mount the React app
+cat > "$DEPLOY_DIR/index.html" <<EOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React + Drogon</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="main.js"></script>
+</body>
+</html>
+EOF
+
+# Initialize React frontend
+cd "$FRONTEND_DIR"
+
+echo "Initializing npm..."
+npm init -y
+
+echo "Installing React dependencies..."
+npm install react react-dom
+
+echo "Installing development dependencies..."
+npm install --save-dev webpack webpack-cli webpack-dev-server babel-loader @babel/core @babel/preset-env @babel/preset-react
+
+# Create Babel configuration file (babel.config.json)
+cat > babel.config.json <<EOF
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ]
+}
+EOF
+
+# Create Webpack configuration file (webpack.config.js)
+cat > webpack.config.js <<EOF
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, '../$DEPLOY_DIR')
+  },
+  module: {
+    rules: [
+      {
+        test: /\\.jsx?$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+  mode: 'production'
+};
+EOF
+
+# Create React source folder and files
+mkdir -p src
+cat > src/index.js <<EOF
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+EOF
+
+cat > src/App.jsx <<EOF
+import React from 'react';
+
+export default function App () {
+  return (
+    <div>
+      <h1>Hello from React!</h1>
+    </div>
+  );
+};
+EOF
+
+# Override package.json with correct scripts and dependencies
+cat > package.json <<EOF
+{
+  "name": "$PROJECT_NAME",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.74.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.10.0",
+    "babel-loader": "^8.2.5",
+    "@babel/core": "^7.18.9",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-react": "^7.18.6"
+  }
+}
+EOF
+
+cd ..
+
+echo ""
+echo "✅ Project \"$PROJECT_NAME\" created successfully!"
+echo ""
+echo "Next steps to run your project:"
+echo ""
+echo "1. Build the React application:"
+echo "   cd $PROJECT_NAME/frontend && npm run build"
+echo "   This will compile your React code and output 'main.js' into the deploy directory."
+echo ""
+echo "2. Build the Drogon project:"
+echo "   cd $PROJECT_NAME/backend && mkdir -p build && cd build && cmake .. && make"
+echo "   The server executable will be placed in the deploy directory."
+echo ""
+echo "3. Run the Drogon server:"
+echo "   From the deploy directory, run the executable (e.g., ./your_executable_name)."
+echo ""
+echo "4. Open your browser and navigate to: http://localhost:8080/"
+echo "   You should see the React application served by Drogon."
