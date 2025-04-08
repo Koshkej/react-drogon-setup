@@ -42,7 +42,7 @@ Official Resources:
 
 ### Why use this?
 
-✔️ Saves 40-60 minutes of initial setup  
+✔️ Saves time of initial setup  
 ✔️ Eliminates configuration errors  
 ✔️ Production-ready template  
 ✔️ Modern toolchain integration  
