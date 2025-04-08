@@ -2,10 +2,26 @@
 
 Automated script for rapid fullstack project initialization with modern stack:
 - **Frontend**: React 18 (Webpack 5 + Babel 7)
-- **Backend**: [Drogon С++ Framework](https://github.com/drogonframework/drogon)
+- **Backend**: [Drogon Framework](https://github.com/drogonframework/drogon) (C++17 HTTP-server)
 - **Infrastructure**: Automated build and deployment
 
 ### What does this script do?
+
+#### About Drogon
+
+Drogon is a high-performance C++17/20 HTTP application framework. Key features:
+
+- Async/non-blocking architecture
+- Built-in HTTP/1.1 and WebSocket support
+- Cross-platform (Linux/macOS/Windows)
+- ORM and template engine support
+- Used in production by Tencent, Alibaba, and others
+
+Official Resources:
+
+> - GitHub: [drogonframework/drogon](https://github.com/drogonframework/drogon)
+> - Documentation: [Drogon Website](https://drogon.org/)
+> - Community: [GitHub Discussions](https://github.com/drogonframework/drogon/discussions)
 
 #### Core Features
 1. Creates 3-in-1 project structure:
