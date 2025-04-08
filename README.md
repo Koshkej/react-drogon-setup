@@ -119,9 +119,9 @@ my_project/
 │ ├── CMakeLists.txt    # Pre-configured build
 │ └── main.cc           # Server listening on :8080
 └── deploy/
-├── index.html          # Entry point
-├── main.js             # ReatJS complied app
-└── my_project          # Compiled executable
+   ├── index.html          # Entry point
+   ├── main.js             # ReatJS complied app
+   └── my_project          # Compiled executable
 ```
 
 3. Drogon setup:
