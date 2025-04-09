@@ -113,7 +113,7 @@ Next steps to run your project:
 3. Run the Drogon server:
    From the deploy directory, run the executable (e.g., ./your_executable_name).
 
-4. Open your browser and navigate to: http://localhost:8080/
+4. Open your browser and navigate to: http://localhost:5555/
    You should see the React application served by Drogon.
 ```
 
@@ -136,7 +136,7 @@ my_project/
 │   └── babel.config.json # JSX support
 ├── backend/
 │   ├── CMakeLists.txt    # Pre-configured build
-│   └── main.cc           # Server listening on :8080
+│   └── main.cc           # Server listening on :5555
 └── deploy/
     ├── index.html        # Entry point
     ├── main.js           # ReactJS compiled app
