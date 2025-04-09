@@ -56,32 +56,32 @@ Official Resources:
 
 #### Requirements
 
-🟣 **OS**: Ubuntu/Debian or compatible
+**[1] OS**: Ubuntu/Debian or compatible
 
-🟣 **Minimum versions**:
+**[2] Minimum versions**:
 
    - Node.js 16.x+
    - npm 8.x+
    - CMake 3.15+
    - gcc/g++ 11.x+
 
-🟣 sudo privileges for Drogon installation**
+**[3] sudo privileges for Drogon installation**
 
 #### Installation
 
-**[1]** Download script:
+**[1] Download script:**
 
 ```bash
 wget https://your-domain.com/path/to/bush
 ```
 
-**[2]** Make executable:
+**[2] Make executable:**
    
 ```bash
 chmod +x bush
 ```
 
-**[3]** (Optional) Add to PATH:
+**[3] (Optional) Add to PATH:**
 
 ```bash
 sudo mv bush /usr/local/bin/
@@ -157,7 +157,7 @@ my_project/
 
 ### Project Workflow
 
-#### 🟣 Frontend Development
+#### Frontend Development
 
 Start dev server with hot reload:
 
@@ -172,7 +172,7 @@ npm run dev
 - Source maps for debugging
 - API request proxying to Drogon
 
-#### 🟣 Backend Development
+#### Backend Development
 
 Build and run:
 
@@ -185,21 +185,21 @@ make
 
 ### Production Build
 
-#### 🟣 Build frontend:
+#### [1] Build frontend:
 
 ```bash
 cd frontend
 npm run build # ⇒ /deploy/main.js
 ```
 
-#### 🟣 Build backend:
+#### [2] Build backend:
 
 ```bash
 cd backend/build
 make clean && make
 ```
 
-#### 🟣 Run server:
+#### [3] Run server:
 
 ```bash
 cd deploy
