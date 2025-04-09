@@ -56,16 +56,8 @@ Official Resources:
 
 #### Requirements
 
-**[1] OS**: Ubuntu/Debian or compatible
-
-**[2] Minimum versions**:
-
-   - Node.js 16.x+
-   - npm 8.x+
-   - CMake 3.15+
-   - gcc/g++ 11.x+
-
-**[3] sudo privileges for Drogon installation**
+Ubuntu/Debian or compatible, Node.js 16.x+, npm 8.x+, CMake 3.15+, gcc/g++ 11.x+ <br>
+**Sudo privileges for Drogon installation**
 
 #### Installation
 
@@ -121,12 +113,12 @@ Next steps to run your project:
 
 Script executes sequentially:
 
-#### 🟣 Argument validation:
+#### [1] Argument validation:
 
 - Checks project name presence
 - Verifies directory doesn't exist
 
-#### 🟣 Structure creation:
+#### [2] Structure creation:
    
 ```bash
 my_project/
@@ -143,13 +135,13 @@ my_project/
     └── my_project        # Compiled executable
 ```
 
-#### 🟣 Drogon setup:
+#### [3] Drogon setup:
 
 - Auto-install via apt
 - CMake patching for /deploy output
 - Basic HTTP server example
 
-#### 🟣 React initialization:
+#### [4] React initialization:
 
 - Dependency installation (react, webpack, babel)
 - Preconfigured JSX rules
