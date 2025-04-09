@@ -2,7 +2,7 @@
 
 Automated script for rapid fullstack project initialization with modern stack:
 - **Frontend**: React 18 (Webpack 5 + Babel 7)
-- **Backend**: [Drogon Framework](https://github.com/drogonframework/drogon) (C++17 HTTP-server)
+- **Backend**: [Drogon Framework](https://github.com/drogonframework/drogon) (C++20 HTTP-server)
 - **Infrastructure**: Automated build and deployment
 
 ### What does this script do?
@@ -19,26 +19,30 @@ Drogon is a high-performance C++17/20 HTTP application framework. Key features:
 
 Official Resources:
 
-> - GitHub: [drogonframework/drogon](https://github.com/drogonframework/drogon)
-> - Documentation: [Drogon Website](https://drogon.org/)
-> - Community: [GitHub Discussions](https://github.com/drogonframework/drogon/discussions)
+- GitHub: [drogonframework/drogon](https://github.com/drogonframework/drogon)
+- Documentation: [Drogon Website](https://drogon.org/)
+- Community: [GitHub Discussions](https://github.com/drogonframework/drogon/discussions)
 
 #### Core Features
-1. Creates 3-in-1 project structure:
-   - `/frontend` - React app with preconfigured setup
-   - `/backend` - Drogon server with proper CMake configuration
-   - `/deploy` - Shared directory for production artifacts
 
-2. Automatic configuration:
-   - Installs Drogon (if missing)
-   - Configures Webpack for production/development builds
-   - Generates basic React components (App, index)
-   - Sets up CORS and static file serving through Drogon
+🟣 Creates 3-in-1 project structure:
 
-3. Workflow optimization:
-   - Configures output directory for Drogon binaries
-   - Creates HTML template for React app
-   - Generates convenient NPM scripts
+- `/frontend` - React app with preconfigured setup
+- `/backend` - Drogon server with proper CMake configuration
+- `/deploy` - Shared directory for production artifacts
+
+🟣 Automatic configuration:
+
+- Installs Drogon (if missing)
+- Configures Webpack for production/development builds
+- Generates basic React components (App, index)
+- Sets up CORS and static file serving through Drogon
+
+🟣 Workflow optimization:
+   
+- Configures output directory for Drogon binaries
+- Creates HTML template for React app
+- Generates convenient NPM scripts
 
 ### Why use this?
 
@@ -51,40 +55,44 @@ Official Resources:
 ### Complete Guide
 
 #### Requirements
-1. **OS**: Ubuntu/Debian or compatible
-2. **Minimum versions**:
+
+🟣 **OS**: Ubuntu/Debian or compatible
+
+🟣 **Minimum versions**:
+
    - Node.js 16.x+
    - npm 8.x+
    - CMake 3.15+
    - gcc/g++ 11.x+
-3. sudo privileges for Drogon installation
+
+🟣 sudo privileges for Drogon installation**
 
 #### Installation
 
-1. Download script:
+**[1]** Download script:
 
 ```bash
 wget https://your-domain.com/path/to/bush
 ```
 
-2. Make executable:
+**[2]** Make executable:
    
 ```bash
 chmod +x bush
 ```
 
-4. (Optional) Add to PATH:
+**[3]** (Optional) Add to PATH:
 
 ```bash
 sudo mv bush /usr/local/bin/
 ```
    
-#### Usage
+### Usage
 
 Basic execution:
 
 ```bash
-./bush my_project
+create-react-drogon my_project
 ```
 
 After completion you'll see:
@@ -98,16 +106,16 @@ Next steps:
 3. Run server: cd ../deploy && ./my_project
 ```
 
-#### Creation Process Details
+### Creation Process Details
 
 Script executes sequentially:
 
-1. Argument validation:
+#### 🟣 Argument validation:
 
 - Checks project name presence
 - Verifies directory doesn't exist
 
-2. Structure creation:
+#### 🟣 Structure creation:
    
 ```bash
 my_project/
@@ -124,22 +132,22 @@ my_project/
     └── my_project        # Compiled executable
 ```
 
-3. Drogon setup:
+#### 🟣 Drogon setup:
 
 - Auto-install via apt
 - CMake patching for /deploy output
 - Basic HTTP server example
 
-4. React initialization:
+#### 🟣 React initialization:
 
 - Dependency installation (react, webpack, babel)
 - Preconfigured JSX rules
 
 Ready-to-use npm scripts
 
-#### Project Workflow
+### Project Workflow
 
-**Frontend Development**
+#### 🟣 Frontend Development
 
 Start dev server with hot reload:
 
@@ -154,7 +162,7 @@ Features:
 - Source maps for debugging
 - API request proxying to Drogon
 
-**Backend Development**
+#### 🟣 Backend Development
 
 Build and run:
 
@@ -171,23 +179,23 @@ Move binary:
 cp my_project ../../deploy/
 ```
 
-#### Production Build
+### Production Build
 
-**Build frontend:**
+#### 🟣 Build frontend:
 
 ```bash
 cd frontend
 npm run build # ⇒ /deploy/main.js
 ```
 
-**Build backend:**
+#### 🟣 Build backend:
 
 ```bash
 cd backend/build
 make clean && make -j4
 ```
 
-**Run server:**
+#### 🟣 Run server:
 
 ```bash
 cd deploy
