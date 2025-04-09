@@ -100,10 +100,21 @@ After completion you'll see:
 ```bash
 ✅ Project "my_project" created successfully!
 
-Next steps:
-1. Build React: cd my_project/frontend && npm run build
-2. Compile Drogon: cd my_project/backend && mkdir build && cd build && cmake .. && make
-3. Run server: cd ../deploy && ./my_project
+Next steps to run your project:
+
+1. Build the React application:
+   cd my_project/frontend && npm run build
+   This will compile your React code and output 'main.js' into the deploy directory.
+
+2. Build the Drogon project:
+   cd my_project/backend && mkdir -p build && cd build && cmake .. && make
+   The server executable will be placed in the deploy directory.
+
+3. Run the Drogon server:
+   From the deploy directory, run the executable (e.g., ./your_executable_name).
+
+4. Open your browser and navigate to: http://localhost:8080/
+   You should see the React application served by Drogon.
 ```
 
 ### Creation Process Details
@@ -142,8 +153,7 @@ my_project/
 
 - Dependency installation (react, webpack, babel)
 - Preconfigured JSX rules
-
-Ready-to-use npm scripts
+- Ready-to-use npm scripts
 
 ### Project Workflow
 
@@ -153,12 +163,12 @@ Start dev server with hot reload:
 
 ```bash
 cd frontend
-npm run dev # -> http://localhost:8081
+npm run dev
 ```
 
-Features:
+**Features:**
 
--Auto-rebuild on changes
+- Auto-rebuild on changes
 - Source maps for debugging
 - API request proxying to Drogon
 
@@ -169,14 +179,8 @@ Build and run:
 ```bash
 cd backend
 mkdir -p build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j4
-```
-
-Move binary:
-
-```bash
-cp my_project ../../deploy/
+cmake ..
+make
 ```
 
 ### Production Build
@@ -192,12 +196,12 @@ npm run build # ⇒ /deploy/main.js
 
 ```bash
 cd backend/build
-make clean && make -j4
+make clean && make
 ```
 
 #### 🟣 Run server:
 
 ```bash
 cd deploy
-./my_project # Server on :8080
+./my_project
 ```
