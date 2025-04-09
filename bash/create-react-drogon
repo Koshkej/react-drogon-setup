@@ -54,14 +54,14 @@ drogon_ctl create project "$BACKEND_DIR" > /dev/null
 # Insert the setting right after the 'project(' line.
 sed -i '/^project(/a set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/../deploy")' "$BACKEND_DIR/CMakeLists.txt"
 
-# (Optional) Ensure main.cc exists and listens on port 8080.
+# (Optional) Ensure main.cc exists and listens on port 5555.
 # If main.cc does not exist or needs to be overridden, uncomment the following block:
 : <<'END_COMMENT'
 if [ ! -f "$BACKEND_DIR/main.cc" ]; then
   cat > "$BACKEND_DIR/main.cc" <<EOF
 #include <drogon/drogon.h>
 int main() {
-    drogon::app().addListener("0.0.0.0", 8080);
+    drogon::app().addListener("0.0.0.0", 5555);
     drogon::app().run();
     return 0;
 }
@@ -198,5 +198,5 @@ echo ""
 echo "3. Run the Drogon server:"
 echo "   From the deploy directory, run the executable (e.g., ./your_executable_name)."
 echo ""
-echo "4. Open your browser and navigate to: http://localhost:8080/"
+echo "4. Open your browser and navigate to: http://localhost:5555/"
 echo "   You should see the React application served by Drogon."
